@@ -1,29 +1,45 @@
-import "bootstrap/dist/css/bootstrap.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import All from "./components/All";
-import Fsd from "./components/Full_Stack_Development";
-import Data_sc from "./components/Data_Science";
-import Cyber from "./components/Cyber_Security";
+import Fsd from "./components/Fsd";
+import DataScience from "./components/DataScience";
+import CyberSecurity from "./components/CyberSecurity";
 import Career from "./components/Career";
-import Home from "./components/Home";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navbar />,
+    children: [
+      {
+        path: "/all",
+        element: <All />,
+      },
+      {
+        path: "/fsd",
+        element: <Fsd />,
+      },
+      {
+        path: "/data-science",
+        element: <DataScience />,
+      },
+      {
+        path: "/cyber-security",
+        element: <CyberSecurity />,
+      },
+      {
+        path: "/career",
+        element: <Career />,
+      },
+    ],
+  },
+]);
+const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/All" element={<All />}></Route>
-          <Route path="/Fsd" element={<Fsd />}></Route>
-          <Route path="/Data_sc" element={<Data_sc />}></Route>
-          <Route path="/Cyber" element={<Cyber />}></Route>
-          <Route path="/Career" element={<Career />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <RouterProvider router={router}>
+      <Navbar />
+    </RouterProvider>
   );
-}
+};
 
 export default App;
